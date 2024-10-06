@@ -1,0 +1,49 @@
+.filter-wrapper,
+.type-size-reset-container,
+.search-addtocart-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filter-wrapper {
+    padding: 10px 0px;
+}
+
+
+.type-size-reset-container {
+    gap: 5px;
+}
+
+.search-addtocart-container {
+    gap: 15px;
+}
+
+.reset-conatiner {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+}
+
+.reset-btn {
+    color: #318CE7;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.add-to-cart-btn {
+    background-color: #318CE7;
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+.search-input label {
+    color: grey;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+}
