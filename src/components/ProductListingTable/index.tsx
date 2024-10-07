@@ -163,7 +163,7 @@ const ProductListingTable = () => {
     item: productListingDummyDataTypes
   ) => {
     const enteredQty = Number(e.target.value);
-    
+
     if (enteredQty > item.stock) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -174,7 +174,7 @@ const ProductListingTable = () => {
         ...prevErrors,
         [item.id]: "",
       }));
-  
+
       // Check if the item is already in the cart to update the quantity
       if (cartState.cart.some((i) => i.id === item.id)) {
         cartDispatch({
@@ -195,7 +195,6 @@ const ProductListingTable = () => {
       }
     }
   };
-  
 
   const fields: Field[] = [
     {
@@ -277,20 +276,26 @@ const ProductListingTable = () => {
             <div className="bg-gray-900 py-2 px-3">
               <FaShoppingCart className="text-white" />
             </div>
-            <div className="py-2 px-3">
-              <input
-                type="checkbox"
-                checked={cartState.cart.some((i) => i.id === item.id)}
-                onChange={(e) => {
-                  handelCheckboxInputChange(e, item);
-                }}
-              />
-            </div>
+            {
+              <div className="py-2 px-3">
+                {item.stock > 0 && (
+                  <input
+                    type="checkbox"
+                    checked={cartState.cart.some((i) => i.id === item.id)}
+                    onChange={(e) => {
+                      handelCheckboxInputChange(e, item);
+                    }}
+                  />
+                )}
+              </div>
+            }
           </div>
           <div className="">
             {errors[item.id] ? (
-              <p className="text-red-500 text-sm text-[10px]">{errors[item.id]}</p>
-            ): (
+              <p className="text-red-500 text-sm text-[10px]">
+                {errors[item.id]}
+              </p>
+            ) : (
               <p className="h-[20px]"></p>
             )}
           </div>

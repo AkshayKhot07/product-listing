@@ -61,7 +61,7 @@ export const productListingDummyData: productListingDummyDataTypes[] = [
     inStock: false,
     price: 24.99,
     id: "shirtblue",
-    stock: 6,
+    stock: 0,
   },
   {
     image: HOODIE_BLUE,
@@ -105,7 +105,7 @@ export const productListingDummyData: productListingDummyDataTypes[] = [
     inStock: false,
     price: 32.99,
     id: "hoodiegreen",
-    stock: 4,
+    stock: 0,
   },
   {
     image: TSHIRT_MAROON,
@@ -127,7 +127,7 @@ export const productListingDummyData: productListingDummyDataTypes[] = [
     inStock: false,
     price: 29.99,
     id: "shirtgrey",
-    stock: 5,
+    stock: 0,
   },
   {
     image: HOODIE_RED,
@@ -171,7 +171,7 @@ export const productListingDummyData: productListingDummyDataTypes[] = [
     inStock: false,
     price: 35.99,
     id: "hoodiewhite",
-    stock: 2,
+    stock: 0,
   },
 
   {
@@ -191,10 +191,10 @@ export const productListingDummyData: productListingDummyDataTypes[] = [
     type: "shirt",
     size: "medium",
     color: "yellow",
-    inStock: false,
+    inStock: true,
     price: 36.99,
     id: "shirtyellow",
-    stock: 7,
+    stock: 3,
   },
 ];
 

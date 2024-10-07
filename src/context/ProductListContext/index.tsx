@@ -11,7 +11,6 @@ import {
   SortFilterState,
 } from "../ProductListReducer";
 
-
 export interface ProductListContextType {
   cartState: CartState;
   cartDispatch: Dispatch<CartAction>;
@@ -23,40 +22,48 @@ const ProductListContext = createContext<ProductListContextType | undefined>(
   undefined
 );
 
+// Local Storage Functions
+const setLocalStorage = (key: string, value: any) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
+
+const getLocalStorage = (key: string) => {
+  const value = localStorage.getItem(key);
+  return value ? JSON.parse(value) : null;
+};
+
 const ProductListContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [cartState, cartDispatch] = useReducer(cartReducer, {
+  const initialCartState = getLocalStorage("cartState") || {
     products: productListingDummyData,
     cart: [],
-  });
+  };
 
-  const [sortFilterState, sortFilterDispatch] = useReducer(sortFilterReducer, {
+  const initialSortFilterState = getLocalStorage("sortFilterState") || {
     bySort: {
       key: "",
       order: "",
     },
-    //Filter Comp
     searchQuery: "",
     byType: "",
     bySize: "",
-  });
+  };
 
-  // const [searchParams] = useSearchParams();
+  const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
+  const [sortFilterState, sortFilterDispatch] = useReducer(sortFilterReducer, initialSortFilterState);
 
-  // useEffect(() => {
-  //   const sortBy = searchParams.get("sortBy");
-  //   const sortOrder = searchParams.get("sortOrder");
+  // Effect to persist cartState to localStorage
+  useEffect(() => {
+    setLocalStorage("cartState", cartState);
+  }, [cartState]);
 
-  //   if (sortBy && sortOrder) {
-  //     cartDispatch({
-  //       type: "SORT_PRODUCTS",
-  //       payload: { sortBy, sortOrder },
-  //     });
-  //   }
-  // }, [searchParams]);
+  // Effect to persist sortFilterState to localStorage
+  useEffect(() => {
+    setLocalStorage("sortFilterState", sortFilterState);
+  }, [sortFilterState]);
 
   return (
     <ProductListContext.Provider
