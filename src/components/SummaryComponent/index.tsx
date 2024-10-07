@@ -28,7 +28,7 @@ const SummaryComponent = () => {
             <p className="flex gap-2 justify-between pt-2 mt-2 border-t-2 border-gray-500">
               <span className="font-bold text-gray-700">Total</span>
               <span className="text-blue-700 font-bold">
-                {subTotal?.toFixed(2)}
+                ${subTotal?.toFixed(2)}
               </span>
             </p>
             <div>

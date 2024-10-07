@@ -14,7 +14,7 @@ const SmallLoader = ({
       {...props}
       aria-hidden="true"
       className={classNames(
-        "inline items-center  text-gray-200 animate-spin dark:text-gray-200 fill-primary-1000",
+        "inline items-center  text-blue-400 animate-spin dark:text-gray-200 fill-primary-1000",
         className,
       )}
       viewBox="0 0 100 101"

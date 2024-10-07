@@ -4,15 +4,26 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
 import useProductList from "../../hooks/useProductList";
 import { productListingDummyDataTypes } from "../../constants/data";
+import classNames from "classnames";
 
 const ProductListingTable = () => {
   const { cartState, sortFilterState, sortFilterDispatch, cartDispatch } =
     useProductList();
+    const [loading, setLoading] = useState(false);
+
+    //useEffect to simulate loading state
+    useEffect(() => {
+      setLoading(true);
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 500); 
+      return () => clearTimeout(timer);
+    }, [sortFilterState]);
+
+
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const modifiedProducts = useMemo(() => {
     let modifiedProductsData = [...cartState.products];
-
-    console.log("modifiedProductsData", modifiedProductsData);
 
     if (sortFilterState.bySort.key && sortFilterState.bySort.order) {
       if (sortFilterState.bySort.key === "color") {
@@ -82,7 +93,7 @@ const ProductListingTable = () => {
       });
     }
 
-    console.log("modifiedProductsData", modifiedProductsData);
+
 
     return modifiedProductsData;
   }, [
@@ -217,7 +228,7 @@ const ProductListingTable = () => {
       label: "Name",
       render: (value) => (
         <div>
-          <p>{value}</p>
+          <p className="text-[#318CEF] font-semibold">{value}</p>
         </div>
       ),
       headerClass: "!min-w-[130px] !max-w-[130px]",
@@ -228,7 +239,7 @@ const ProductListingTable = () => {
       label: "Color",
       render: (value) => (
         <div>
-          <p className="capitalize">{value}</p>
+          <p className="capitalize text-[#318CEF] font-semibold">{value}</p>
         </div>
       ),
       headerClass: "!min-w-[130px] !max-w-[130px]",
@@ -240,7 +251,11 @@ const ProductListingTable = () => {
       label: "Stock",
       render: (value) => (
         <div>
-          <p>{value ? "In Stock" : "Not In Stock"}</p>
+          <p 
+          className={classNames(
+            value? "text-green-500 font-semibold":"text-red-500 font-semibold"
+          )}
+          >{value ? "In Stock" : "Not In Stock"}</p>
         </div>
       ),
       headerClass: "!min-w-[130px] !max-w-[130px]",
@@ -252,7 +267,7 @@ const ProductListingTable = () => {
       label: "Price",
       render: (value) => (
         <div>
-          <p>{value}</p>
+          <p className="text-gray-500 font-semibold">${value}</p>
         </div>
       ),
       headerClass: "!min-w-[130px] !max-w-[130px]",
@@ -292,7 +307,7 @@ const ProductListingTable = () => {
           </div>
           <div className="">
             {errors[item.id] ? (
-              <p className="text-red-500 text-sm text-[10px]">
+              <p className="text-red-500 text-[10px] !font-[10px]">
                 {errors[item.id]}
               </p>
             ) : (
@@ -308,7 +323,7 @@ const ProductListingTable = () => {
   return (
     <div className="product-listing-table">
       <TableComponent
-        isLoading={false}
+        isLoading={loading}
         fields={fields}
         columns={modifiedProducts || []}
         handleSortClick={handleSortClick}

@@ -5,7 +5,7 @@ import { MdOutlineCancel } from "react-icons/md";
 const SummaryProductList = () => {
   const { cartState } = useProductList();
 
-  console.log("cartState Summary Product List", cartState);
+
 
   return (
     <div className="summary-container">
@@ -74,7 +74,7 @@ const SummaryProductCard = ({
           <p>{item.name}</p>
         </div>
       </li>
-      <li className="flex-1">{item.price}</li>
+      <li className="flex-1 text-gray-500 font-[500]">${item.price}</li>
       <li className="flex-1">
         <div className="flex gap-1 items-center py-2 border border-gray-200 rounded-3xl justify-center w-[100px]">
           <button
@@ -105,8 +105,8 @@ const SummaryProductCard = ({
           </button>
         </div>
       </li>
-      <li className="flex-1">
-        {calculateProductPrice({
+      <li className="flex-1 font-semibold text-[#318CEF]">
+        ${calculateProductPrice({
           product: item,
         })}
       </li>

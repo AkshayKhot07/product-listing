@@ -1,34 +1,20 @@
-// import Footer from "../components/Footer";
-// import Navbar from "../components/Navbar";
-import "./Layout.css";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div className="flex-wrapper">
+      <div className="flex flex-col min-h-screen justify-between">
         <div>
-          {/* <Navbar /> */}
-          <nav
-            style={{
-              padding: "20px 0px 20px 0px",
-              border: "1px solid black"
-            }}
-          >
-            Navbar
-          </nav>
-          <main className="container">{children}</main>
+          <Navbar />
+          <main className="container mx-auto px-5 max-w-[1241px] sm:max-w-[1240px]">
+            {children}
+          </main>
         </div>
         <div className="footer">
-          <footer
-            style={{
-              padding: "20px 0px 20px 0px",
-                            border: "1px solid black"
-            }}
-          >
-            Footer
-          </footer>
+          <Footer />
         </div>
       </div>
-    </>
+    </> 
   );
 }

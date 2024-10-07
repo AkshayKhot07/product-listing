@@ -61,7 +61,7 @@ const TableComponent = <T extends Record<string, any>>({
           })}
         </colgroup>
 
-        <thead className="bg-background-3 text-text-2 rounded-md border border-b-text-3">
+        <thead className="bg-gray-200 text-text-2 rounded-md border border-b-text-3">
           <tr className="min-h-[50px] h-[50px] max-h-[50px]">
             {fields.map((item) => {
               return (
@@ -84,7 +84,6 @@ const TableComponent = <T extends Record<string, any>>({
                           type="checkbox"
                           ref={inputSelectAllRef}
                           checked={
-                            // values.length === questions.length && questions.length !== 0
                             currPageSelectAll &&
                             currPageSelectAll.length === pageSize &&
                             pageSize !== 0
@@ -102,9 +101,9 @@ const TableComponent = <T extends Record<string, any>>({
                         )}
                         onClick={() => {
                           setSortLoaderKey(item.key);
-                          item.sort &&
-                            handleSortClick &&
+                          if (item.sort && handleSortClick) {
                             handleSortClick(item.key);
+                          }
                         }}
                       >
                         {isLoading && item.key === sortLoaderKey ? (
@@ -140,9 +139,9 @@ const TableComponent = <T extends Record<string, any>>({
                         )}
                         onClick={() => {
                           setSortLoaderKey(item.key);
-                          item.sort &&
-                            handleSortClick &&
+                          if (item.sort && handleSortClick) {
                             handleSortClick(item.key);
+                          }
                         }}
                       >
                         {isLoading && item.key === sortLoaderKey ? (
@@ -168,7 +167,6 @@ const TableComponent = <T extends Record<string, any>>({
                         type="checkbox"
                         ref={inputSelectAllRef}
                         checked={
-                          // values.length === questions.length && questions.length !== 0
                           currPageSelectAll &&
                           currPageSelectAll.length === pageSize &&
                           pageSize !== 0
