@@ -4,7 +4,7 @@ import SummaryProductList from "./SummaryProductList";
 import { Link } from "react-router-dom";
 
 const SummaryComponent = () => {
-  const { cartState, cartDispatch } = useProductList();
+  const { cartState, cartDispatch, sortFilterDispatch } = useProductList();
   const [subTotal, setSubTotal] = useState<number>(0);
 
   useEffect(() => {
@@ -40,6 +40,9 @@ const SummaryComponent = () => {
                     cartDispatch({
                       type: "CLEAR_CART",
                     });
+                    sortFilterDispatch({
+                      type:"CLEAR_FILTERS"
+                    })
                   }}
                 >
                   Proceed To Checkout
