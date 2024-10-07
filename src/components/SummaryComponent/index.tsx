@@ -32,21 +32,20 @@ const SummaryComponent = () => {
               </span>
             </p>
             <div>
-
-            <Link to={"/thankyou"} className="w-full block">
-              <button
-                type="button"
-                className="bg-blue-700 w-full py-2 px-4 rounded-3xl text-white font-bold"
-                onClick={()=> {
+              <Link to={"/thankyou"} className="w-full block">
+                <button
+                  type="button"
+                  className="bg-blue-700 w-full py-2 px-4 rounded-3xl text-white font-bold"
+                  onClick={() => {
                     cartDispatch({
-                        type:"CLEAR_CART"
-                    })
-                }}
+                      type: "CLEAR_CART",
+                    });
+                  }}
                 >
-                Proceed To Checkout
-              </button>
-            </Link>
-                  </div>
+                  Proceed To Checkout
+                </button>
+              </Link>
+            </div>
           </>
         ) : (
           <p className="font-bold text-gray-700">No Items Added</p>
