@@ -30,7 +30,7 @@ const SummaryProductCard = ({
 }: {
   item: productListingDummyDataTypes;
 }) => {
-  const { cartDispatch, cartState } = useProductList();
+  const { cartDispatch } = useProductList();
 
   const changeProductQty = ({ id, qty }: { id: string; qty: number }) =>
     cartDispatch({

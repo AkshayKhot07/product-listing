@@ -1,7 +1,6 @@
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import TableComponent, { Field, SortOrder } from "./TableComponent";
 import { FaShoppingCart } from "react-icons/fa";
-import { useSearchParams } from "react-router-dom";
 import useProductList from "../../hooks/useProductList";
 import { productListingDummyDataTypes } from "../../constants/data";
 import classNames from "classnames";
