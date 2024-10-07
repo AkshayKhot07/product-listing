@@ -3,6 +3,7 @@ import { PrivateOutlet } from "../components/PrivateOutlet";
 import Home from "../pages/home";
 import NotFound from "../components/NotFound";
 import Summary from "../pages/summary";
+import Thankyou from "../pages/thankyou";
 
 
 const Router = () => {
@@ -11,7 +12,7 @@ const Router = () => {
       <Route path="/" element={<PrivateOutlet />}>
         <Route index element={<Home />} />
         <Route path="product-summary" element={<Summary />} />
-        {/* <Route path="thankyou" element={<BlogPostForm />} /> */}
+        <Route path="thankyou" element={<Thankyou />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

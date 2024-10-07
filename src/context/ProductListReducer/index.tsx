@@ -34,8 +34,13 @@ export const cartReducer = (
   action: CartAction
 ): CartState => {
   switch (action.type) {
-    case "ADD_TO_CART":
-      return { ...state, cart: [...state.cart, { ...action.payload, qty: 1 }] };
+    case "ADD_TO_CART": {
+      const { qty = 1 } = action.payload;
+      return {
+        ...state,
+        cart: [...state.cart, { ...action.payload, qty }],
+      };
+    }
     case "REMOVE_FROM_CART":
       return {
         ...state,
@@ -44,9 +49,11 @@ export const cartReducer = (
     case "CHANGE_CART_QTY":
       return {
         ...state,
-        cart: state.cart.map((c) =>
-          c.id === action.payload.id ? { ...c, qty: action.payload.qty } : c
-        ),
+        cart: state.cart
+          .map((c) =>
+            c.id === action.payload.id ? { ...c, qty: action.payload.qty } : c
+          )
+          .filter((c) => Number(c.qty) > 0),
       };
     case "CLEAR_CART":
       return {

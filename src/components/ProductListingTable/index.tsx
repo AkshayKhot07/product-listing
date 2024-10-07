@@ -8,7 +8,7 @@ import { productListingDummyDataTypes } from "../../constants/data";
 const ProductListingTable = () => {
   const { cartState, sortFilterState, sortFilterDispatch, cartDispatch } =
     useProductList();
-
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const modifiedProducts = useMemo(() => {
     let modifiedProductsData = [...cartState.products];
 
@@ -145,7 +145,10 @@ const ProductListingTable = () => {
     if (e.target.checked) {
       cartDispatch({
         type: "ADD_TO_CART",
-        payload: item,
+        payload: {
+          ...item,
+          qty: item.qty ? item.qty : 1,
+        },
       });
     } else {
       cartDispatch({
@@ -154,6 +157,45 @@ const ProductListingTable = () => {
       });
     }
   };
+
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    item: productListingDummyDataTypes
+  ) => {
+    const enteredQty = Number(e.target.value);
+    
+    if (enteredQty > item.stock) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [item.id]: `Stock has a total of ${item.stock} items only.`,
+      }));
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [item.id]: "",
+      }));
+  
+      // Check if the item is already in the cart to update the quantity
+      if (cartState.cart.some((i) => i.id === item.id)) {
+        cartDispatch({
+          type: "CHANGE_CART_QTY",
+          payload: {
+            id: item.id,
+            qty: enteredQty,
+          },
+        });
+      } else {
+        cartDispatch({
+          type: "ADD_TO_CART",
+          payload: {
+            ...item,
+            qty: enteredQty,
+          },
+        });
+      }
+    }
+  };
+  
 
   const fields: Field[] = [
     {
@@ -222,19 +264,35 @@ const ProductListingTable = () => {
       key: "",
       label: "Buy",
       render: (_, item) => (
-        <div className="flex items-center justify-center gap-1">
-          <input type="text" className="w-[50px] py-[6px] bg-gray-200" />
-          <div className="bg-gray-900 py-2 px-3">
-            <FaShoppingCart className="text-white" />
+        <div className="flex flex-col mt-2">
+          <div className="flex items-center justify-center gap-1">
+            <div>
+              <input
+                type="text"
+                value={cartState.cart.find((i) => i.id === item.id)?.qty || ""}
+                className="w-[50px] py-[6px] bg-gray-200 text-center"
+                onChange={(e) => handleInputChange(e, item)}
+              />
+            </div>
+            <div className="bg-gray-900 py-2 px-3">
+              <FaShoppingCart className="text-white" />
+            </div>
+            <div className="py-2 px-3">
+              <input
+                type="checkbox"
+                checked={cartState.cart.some((i) => i.id === item.id)}
+                onChange={(e) => {
+                  handelCheckboxInputChange(e, item);
+                }}
+              />
+            </div>
           </div>
-          <div className="py-2 px-3">
-            <input
-              type="checkbox"
-              checked={cartState.cart.some((i) => i.id === item.id)}
-              onChange={(e) => {
-                handelCheckboxInputChange(e, item);
-              }}
-            />
+          <div className="">
+            {errors[item.id] ? (
+              <p className="text-red-500 text-sm text-[10px]">{errors[item.id]}</p>
+            ): (
+              <p className="h-[20px]"></p>
+            )}
           </div>
         </div>
       ),
