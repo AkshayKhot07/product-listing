@@ -53,7 +53,7 @@ const SummaryProductCard = ({
   return (
     <ul
       key={item.id}
-      className="list-none flex gap-2 items-center border-b-2 border-gray-200 pb-2"
+      className="list-none flex gap-2 items-center border-b-2 border-gray-200 pb-2 mb-2"
     >
       <li className="flex-[2]">
         <div className="flex items-center gap-2">
@@ -70,8 +70,11 @@ const SummaryProductCard = ({
           >
             <MdOutlineCancel />
           </span>
+          <div className="flex items-start md:items-center gap-2 flex-col md:flex-row ">
+
           <img src={item.image} alt={item.name} className="w-[50px] h-[50px]" />
           <p>{item.name}</p>
+          </div>
         </div>
       </li>
       <li className="flex-1 text-gray-500 font-[500]">${item.price}</li>

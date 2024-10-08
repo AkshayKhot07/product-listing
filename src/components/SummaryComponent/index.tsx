@@ -17,7 +17,7 @@ const SummaryComponent = () => {
   }, [cartState]);
 
   return (
-    <div className="flex gap-3 py-4">
+    <div className="flex gap-3 py-4 flex-col md:flex-row">
       <div className="flex-[2]">
         <SummaryProductList />
       </div>
