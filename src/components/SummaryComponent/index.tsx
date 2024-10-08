@@ -41,8 +41,8 @@ const SummaryComponent = () => {
                       type: "CLEAR_CART",
                     });
                     sortFilterDispatch({
-                      type:"CLEAR_FILTERS"
-                    })
+                      type: "CLEAR_FILTERS",
+                    });
                   }}
                 >
                   Proceed To Checkout

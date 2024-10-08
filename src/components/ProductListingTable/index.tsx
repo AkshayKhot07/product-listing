@@ -8,17 +8,16 @@ import classNames from "classnames";
 const ProductListingTable = () => {
   const { cartState, sortFilterState, sortFilterDispatch, cartDispatch } =
     useProductList();
-    const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-    //useEffect to simulate loading state
-    useEffect(() => {
-      setLoading(true);
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 500); 
-      return () => clearTimeout(timer);
-    }, [sortFilterState]);
-
+  //useEffect to simulate loading state
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [sortFilterState]);
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const modifiedProducts = useMemo(() => {
@@ -91,8 +90,6 @@ const ProductListingTable = () => {
         return nameNormalized.includes(searchQueryNormalized);
       });
     }
-
-
 
     return modifiedProductsData;
   }, [
@@ -250,11 +247,15 @@ const ProductListingTable = () => {
       label: "Stock",
       render: (value) => (
         <div>
-          <p 
-          className={classNames(
-            value? "text-green-500 font-semibold":"text-red-500 font-semibold"
-          )}
-          >{value ? "In Stock" : "Not In Stock"}</p>
+          <p
+            className={classNames(
+              value
+                ? "text-green-500 font-semibold"
+                : "text-red-500 font-semibold"
+            )}
+          >
+            {value ? "In Stock" : "Not In Stock"}
+          </p>
         </div>
       ),
       headerClass: "!min-w-[130px] !max-w-[130px]",

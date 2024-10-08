@@ -1,11 +1,11 @@
+import { RxReset } from "react-icons/rx";
 import { productListingDummyDataTypes } from "../../../constants/data";
 import useProductList from "../../../hooks/useProductList";
 import { MdOutlineCancel } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const SummaryProductList = () => {
   const { cartState } = useProductList();
-
-
 
   return (
     <div className="summary-container">
@@ -15,6 +15,26 @@ const SummaryProductList = () => {
         <li className="flex-1">Quantity</li>
         <li className="flex-1">SubTotal</li>
       </ul>
+
+      {cartState?.cart?.length === 0 && (
+        <div className="flex gap-3 items-center">
+          <p className="font-bold text-gray-700">No Items Added</p>
+          <Link to={"/"}>
+            <div className="flex gap-2">
+              <RxReset
+                style={{
+                  color: "#318CE7",
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                }}
+              />
+              <p className="text-[#318CE7] font-bold text-sm">
+                Go Back To Homepage
+              </p>
+            </div>
+          </Link>
+        </div>
+      )}
 
       {cartState?.cart?.map((item) => {
         return <SummaryProductCard item={item} />;
@@ -71,9 +91,12 @@ const SummaryProductCard = ({
             <MdOutlineCancel />
           </span>
           <div className="flex items-start md:items-center gap-2 flex-col md:flex-row ">
-
-          <img src={item.image} alt={item.name} className="w-[50px] h-[50px]" />
-          <p>{item.name}</p>
+            <img
+              src={item.image}
+              alt={item.name}
+              className="w-[50px] h-[50px]"
+            />
+            <p>{item.name}</p>
           </div>
         </div>
       </li>
@@ -109,7 +132,8 @@ const SummaryProductCard = ({
         </div>
       </li>
       <li className="flex-1 font-semibold text-[#318CEF]">
-        ${calculateProductPrice({
+        $
+        {calculateProductPrice({
           product: item,
         })}
       </li>

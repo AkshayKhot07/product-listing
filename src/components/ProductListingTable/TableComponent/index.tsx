@@ -156,7 +156,7 @@ const TableComponent = <T extends Record<string, any>>({
                                 : ""
                             )}
                           >
-                             <IoFilter />
+                            <IoFilter />
                           </span>
                         )}
                       </div>
